@@ -1,1 +1,1 @@
-from .test_diff import DiffTestCase
+from .test_util import RevisionTestCase

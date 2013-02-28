@@ -13,4 +13,8 @@ def write ( request ):
             return HttpResponseRedirect ( "/" )
     else:
         write_form = WriteForm ( )
-    return render ( request, "content/write.html" )
+
+    context = {\
+        "write_form": write_form
+    }
+    return render ( request, "content/write.html", context )

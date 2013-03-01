@@ -7,11 +7,11 @@ class ContentViewTestCase ( unittest.TestCase ):
         self.client.login ( username = 'test', password = 'test' )
 
     def test_write ( self ):
-        self.client.post ( "/content/write", {\
+        self.client.post ( "/_/write", {\
             "slug": "test2",
             "body": "2"
         } )
 
     def test_write_exists ( self ):
-        self.client.post ( "/content/write?slug=test2", {\
+        self.client.post ( "/_/write?slug=test2", {\
             "body": "3" } )

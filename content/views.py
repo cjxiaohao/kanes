@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from .forms import WriteForm
 from .models import Content
@@ -6,8 +7,11 @@ from .models import Content
 def home ( request ):
     return HttpResponse ( "" )
 
-def write ( request ):
-    slug = request.GET.get ( "id", None )
+def view ( request, user, path ):
+    user = User.objects.get ( username = user )
+    return HttpResponse ( "" )
+
+def write ( request, slug ):
     if not slug:
         content = None
     else:

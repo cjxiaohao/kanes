@@ -1,16 +1,21 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.contrib.auth.models import User
 from util import Revision
 from pdb import set_trace as bp
 
 class Content ( models.Model ):
-    slug = models.SlugField ( )
+    user = models.ForeignKey ( User, editable = False, default = 0 )
+    slug = models.CharField ( max_length = 255, db_index = True )
     body = models.TextField ( )
     revisions = models.IntegerField ( editable = False, default = 0 )
 
     def __init__ ( self, *args, **kwargs ):
         super ( Content, self ).__init__ ( *args, **kwargs )
         self.previous_body = self.body
+
+    def __unicode__ ( self ):
+        return self.slug
 
     def make_revision ( self ):
         self.revisions += 1

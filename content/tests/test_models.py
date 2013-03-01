@@ -2,6 +2,7 @@
 
 import unittest
 from content.models import Content, Changelog
+from pdb import set_trace as bp 
 
 class ContentTestCase ( unittest.TestCase ):
 
@@ -13,15 +14,18 @@ class ContentTestCase ( unittest.TestCase ):
         c1 = Content ( slug = "test_signal", body = "one" )
         c1.save ( )
 
-        c2 = Content.objects.get ( id = 1 )
+        c2 = Content.objects.get ( slug = "test_signal" )
         c2.body = "one\ntwo"
         c2.save ( )
 
-        self.assertEqual ( 1, Content.objects.get ( id = 1 ).revisions )
 
-        revision1 = Changelog.objects.all ( )[0]
+        self.assertEqual ( 1, Content.objects.get ( slug = "test_signal" )\
+            .revisions )
+
+        revision1 = c2.changelog_set.all ()[0]
 
         self.assertEqual ( 1, revision1.additions )
         self.assertEqual ( 0, revision1.deletions )
+        self.assertEqual ( 1, revision1.revision )
 
         self.assertEqual ( self.REVISION_DIFF, revision1.body )

@@ -16,10 +16,12 @@ class Content ( models.Model ):
         self.revisions += 1
         revision = Revision ( self.previous_body, self.body )
         c = Changelog ( content = self, body = revision.diff, additions = \
-                    revision.additions, deletions = revision.deletions )
+                    revision.additions, deletions = revision.deletions, \
+                    revision = self.revisions )
         c.save ( )
 
 class Changelog ( models.Model ):
+    revision = models.IntegerField ( default = 0 )
     content = models.ForeignKey ( Content )
     body = models.TextField ( )
     additions = models.IntegerField ( )

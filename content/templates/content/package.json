@@ -1,0 +1,17 @@
+{
+  "name": "gist2c-template",
+  "version": "0.0.1",
+  "description": "gist2c的模版项目。",
+  "author": "CJ <weicongju@gmail.com>",
+  "scripts": {
+    "start": "node bin/server"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-express-server": "~0.1.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-regarde": "~0.1.1",
+    "grunt-contrib": "~0.4.0"
+  }
+}

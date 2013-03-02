@@ -1,0 +1,7 @@
+{
+    "name": "gist2c-template",
+    "version": "0.0.1",
+    "dependencies": {
+        "bootstrap": "2.3.1"
+    }
+}

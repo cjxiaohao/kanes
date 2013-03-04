@@ -12,7 +12,7 @@ def home ( request ):
 
 def all ( request ):
     context = {\
-        "contents": Content.objects.all ( )
+        "contents": Content.objects.filter ( user = request.user )
     }
     return render ( request, "content/all.html", context )
 

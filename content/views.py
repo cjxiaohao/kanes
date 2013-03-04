@@ -10,6 +10,12 @@ from .models import Content
 def home ( request ):
     return HttpResponse ( "" )
 
+def all ( request ):
+    context = {\
+        "contents": Content.objects.all ( )
+    }
+    return render ( request, "content/all.html", context )
+
 def view ( request, user, path ):
     user = User.objects.get ( username = user )
     content = Content.objects.get ( user = user, slug = path )

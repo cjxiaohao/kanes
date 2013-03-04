@@ -38,7 +38,9 @@ def write ( request, path ):
             write_form.instance.user = request.user
             write_form.save ( )
 
-            return HttpResponseRedirect ( reverse ( "content_view", args = ( request.user, write_form.cleaned_data['slug'], ) ) )
+            return HttpResponseRedirect ( \
+                reverse ( "content_view", \
+                          args = ( write_form.cleaned_data['slug'], ) ) )
     else:
         write_form = WriteForm ( instance = content )
 

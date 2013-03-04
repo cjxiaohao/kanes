@@ -11,6 +11,7 @@ urlpatterns = patterns('',
         'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}
     ),
+    (r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('content.urls')),

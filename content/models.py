@@ -7,7 +7,7 @@ from pdb import set_trace as bp
 
 class Content ( models.Model ):
     user = models.ForeignKey ( User, editable = False, default = 0 )
-    slug = models.CharField ( max_length = 255, db_index = True )
+    slug = models.CharField ( max_length = 255, db_index = True, unique = True )
     body = models.TextField ( )
     revisions = models.IntegerField ( editable = False, default = 0 )
     update_at = models.DateTimeField ( auto_now = True, auto_now_add = True, \

@@ -108,9 +108,8 @@ ROOT_URLCONF = 'gist2c.urls'
 WSGI_APPLICATION = 'gist2c.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    # os.path.join ( WEB_ROOT, "templates" ),
+    os.path.join ( WEB_ROOT, "django-registration-bootstrap" ),
 )
 
 INSTALLED_APPS = (
@@ -125,6 +124,7 @@ INSTALLED_APPS = (
     'content',
     'south',
     'crispy_forms',
+    'registration',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,3 +155,5 @@ LOGGING = {
         },
     }
 }
+
+ACCOUNT_ACTIVATION_DAYS = 7

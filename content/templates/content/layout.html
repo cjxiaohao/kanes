@@ -29,8 +29,12 @@
                         <ul class="nav">
                             <li class=""><a href="{% url content_all %}">所有内容</a></li>
                             <li class=""><a href="{% url content_write %}">写</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li class=""><a href="{% url django.contrib.auth.views.logout %}">退出</a></li>
+                            {% else %}
                             <li class=""><a href="{% url registration_register %}">注册</a></li>
                             <li class=""><a href="{% url django.contrib.auth.views.login %}">登陆</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>

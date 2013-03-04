@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 from util import Revision
+from datetime import datetime
 from pdb import set_trace as bp
 
 class Content ( models.Model ):
@@ -9,6 +10,11 @@ class Content ( models.Model ):
     slug = models.CharField ( max_length = 255, db_index = True )
     body = models.TextField ( )
     revisions = models.IntegerField ( editable = False, default = 0 )
+    update_at = models.DateTimeField ( auto_now = True, auto_now_add = True, \
+                                       editable = False, default = \
+                                       datetime.now ( ) )
+    create_at = models.DateTimeField ( auto_now_add = True, editable = False, \
+                                       default = datetime.now ( )  )
 
     def __init__ ( self, *args, **kwargs ):
         super ( Content, self ).__init__ ( *args, **kwargs )
@@ -21,8 +27,8 @@ class Content ( models.Model ):
         self.revisions += 1
         revision = Revision ( self.previous_body, self.body )
         c = Changelog ( content = self, body = revision.diff, additions = \
-                    revision.additions, deletions = revision.deletions, \
-                    revision = self.revisions )
+                        revision.additions, deletions = revision.deletions, \
+                        revision = self.revisions )
         c.save ( )
 
 class Changelog ( models.Model ):
@@ -31,6 +37,13 @@ class Changelog ( models.Model ):
     body = models.TextField ( )
     additions = models.IntegerField ( )
     deletions = models.IntegerField ( )
+
+    create_at = models.DateTimeField ( auto_now_add = True, editable = False, \
+                                       default = datetime.now ( ) )
+
+    def __unicode__ ( self ):
+        return "user: %s, %s revision:%d" % ( self.content.user.username, \
+                                    self.content.slug, self.revision )
 
 def pre_save_content ( sender, **kwargs ):
     instance = kwargs['instance']

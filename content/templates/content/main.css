@@ -12,7 +12,6 @@
 
 body {
   position: relative;
-  padding-top: 40px;
 }
 
 /* Code in headings */
@@ -1066,8 +1065,10 @@ form.bs-docs-example {
 }
 
 /* CJ wrote */
-.padding20 {
-    padding: 20px;
+
+
+.page-main {
+  margin-top: 20px;
 }
 
 /* write */
@@ -1076,9 +1077,9 @@ form.bs-docs-example {
 }
 
 .content-write textarea {
-  width: 100%;
+  width: 98%;
 }
 
 .content-write input {
-  width: 100%;
+  width: 98%;
 }

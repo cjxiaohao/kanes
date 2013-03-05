@@ -1,23 +1,23 @@
 {% extends "content/layout.html" %}
 {% block main %}
-<div class="revision-all">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>路径</th>
-                        <th>修订数</th>
-                        <th>创建</th>
-                    </tr>
-                </thread>
-                <tbody>
-                    {% for content in contents %}
-                    <tr>
-                        <td><a href="{% url content_view user.username content.slug %}">{{content.slug}}</a></td>
-                        <td>{{content.revisions}}</td>
-                        <td>{{content.create_at}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="revision-all page-main">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>路径</th>
+                <th>修订数</th>
+                <th>创建</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for content in contents %}
+            <tr>
+                <td><a href="{% url content_view user.username content.slug %}">{{content.slug}}</a></td>
+                <td>{{content.revisions}}</td>
+                <td>{{content.create_at}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

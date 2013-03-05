@@ -1,10 +1,14 @@
 {% extends "content/layout.html" %}
 {% load crispy_forms_tags %}
 {% block main %}
-<div class="content-write">
-    <form action="" method="post">
-    {{write_form|crispy}}
-    <button class="btn btn-primary">确定</button>
-    </form>
+<div class="container-fluid content-write page-main">
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <form action="" method="post" class="simple_form form-horizontal">
+            {{write_form|crispy}}
+            <button class="btn btn-primary">确定</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

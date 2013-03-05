@@ -8,7 +8,7 @@ from .forms import WriteForm
 from .models import Content
 
 def home ( request ):
-    return HttpResponse ( "" )
+    return HttpResponseRedirect ( reverse ( "content_write" ) )
 
 def all ( request ):
     context = {\

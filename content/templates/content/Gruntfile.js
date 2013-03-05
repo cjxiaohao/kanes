@@ -9,6 +9,7 @@ module.exports = function ( grunt ) {
                 files: [
                     { src: [ 'bootstrap.css', 'bootstrap-responsive.css' ], dest: 'public/css/',
                       cwd: 'components/bootstrap/docs/assets/css/', expand: true },
+                    { src: [ 'main.css' ], dest: 'public/css/' },
                 ]
             },
             img: {

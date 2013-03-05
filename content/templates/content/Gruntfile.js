@@ -26,9 +26,9 @@ module.exports = function ( grunt ) {
         },
 
         regarde: {
-            all: {
-                files: '*.html',
-                tasks: [ 'express-server', 'livereload' ]
+            css: {
+                files: '*.css',
+                tasks: [ 'copy' ]
             }
         },
 

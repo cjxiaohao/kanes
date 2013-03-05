@@ -40,7 +40,8 @@ def write ( request, path ):
 
             return HttpResponseRedirect ( \
                 reverse ( "content_view", \
-                          args = ( write_form.cleaned_data['slug'], ) ) )
+                          args = ( request.user.username, \
+                                   write_form.cleaned_data['slug'], ) ) )
     else:
         write_form = WriteForm ( instance = content )
 

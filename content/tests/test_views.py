@@ -6,6 +6,7 @@ from content.models import Content
 class ContentViewTestCase ( unittest.TestCase ):
     USER = "test"
     PASS = "test"
+
     def setUp ( self ):
         self.client = Client ( )
         self.client.login ( username = self.USER, password = self.PASS )
@@ -24,6 +25,10 @@ class ContentViewTestCase ( unittest.TestCase ):
     def test_write_exists ( self ):
         response = self.client.post ( "/_/write/?slug=test2", {\
             "body": "3" } )
+        self.assertEquals ( 200, response.status_code )
+
+    def test_path_has_space ( self ):
+        response = self.client.get ( "/%s123/test%%201" % self.USER )
         self.assertEquals ( 200, response.status_code )
 
     def test_view ( self ):

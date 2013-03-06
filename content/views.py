@@ -27,6 +27,9 @@ def view ( request, user, path ):
     }
     return render ( request, "content/view.html", context )
 
+def revision ( request, user, path ):
+    pass
+
 @login_required
 def write ( request, path ):
     if not path:

@@ -44,5 +44,15 @@
       "slug": "test 1", 
       "revisions": 0
     }
+  },
+  {
+    "pk": 2, 
+    "model": "content.content", 
+    "fields": {
+      "user": 1,
+      "body": "test", 
+      "slug": "test1", 
+      "revisions": 0
+    }
   }
 ]

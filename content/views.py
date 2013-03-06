@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -18,6 +18,7 @@ def all ( request ):
 
 def view ( request, user, path ):
     user = User.objects.get ( username = user )
+
     content = Content.objects.get ( user = user, slug = path )
     context = {\
         "user": user,
@@ -31,7 +32,13 @@ def write ( request, path ):
     if not path:
         content = None
     else:
-        content = Content.objects.get ( slug = path )
+        try :
+            content = Content.objects.get ( user = request.user, slug = path )
+        except Content.DoesNotExist:
+            raise Http404
+        if not request.user == content.user:
+            raise Http404
+
     if request.method == "POST":
         write_form = WriteForm ( request.POST, instance = content )
         if write_form.is_valid ( ):

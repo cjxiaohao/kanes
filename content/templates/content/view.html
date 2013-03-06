@@ -20,7 +20,8 @@
                 <li class=""><a href="">修订 ({{content.revisions}})</a></li>
                 <li><a href="">赞</a></li>
                 <li><a href="">分支</a></li>
-                <li class="dropdown open pull-right">
+                {% if request.user.is_authenticated and request.user == content.user %}
+                <li class="dropdown open pull-right" id="action">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">操作<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url content_write path %}">编辑</a></li>
@@ -30,6 +31,7 @@
                         <li><a href="#">删除</a></li>
                     </ul>
                 </li>
+                {% endif %}
             </ul>
         </div>
             <div class="row-fluid">

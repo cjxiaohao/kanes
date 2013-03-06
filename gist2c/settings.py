@@ -108,7 +108,7 @@ ROOT_URLCONF = 'gist2c.urls'
 WSGI_APPLICATION = 'gist2c.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # os.path.join ( WEB_ROOT, "templates" ),
+    os.path.join ( WEB_ROOT, "templates" ),
     os.path.join ( WEB_ROOT, "django-registration-bootstrap" ),
 )
 

@@ -3,3 +3,6 @@ south
 django-registration
 django-crispy-forms
 raven
+misaka
+pygments
+houdini.py

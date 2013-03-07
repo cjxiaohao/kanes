@@ -28,6 +28,7 @@ def view ( request, user, path ):
         "user": user,
         "path": path,
         "content": content,
+        "is_markdown": content.syntax == "MARKDOWN",
     }
     return render ( request, "content/view.html", context )
 

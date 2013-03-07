@@ -27,7 +27,7 @@ class Content ( models.Model ):
     syntax = models.CharField ( u"语法解析器", max_length = 50, \
                                 choices = SYNTAX, default = "TEXT", \
                                 null = True, blank = True )
-    public = models.BooleanField ( u"公开", default = False )
+    public = models.BooleanField ( u"公开", default = True )
     html = models.TextField ( editable = False, default = "" )
     revisions = models.IntegerField ( editable = False, default = 0 )
     update_at = models.DateTimeField ( auto_now = True, auto_now_add = True, \

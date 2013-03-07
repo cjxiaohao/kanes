@@ -45,6 +45,11 @@ class ContentViewTestCase ( unittest.TestCase ):
         response = self.client.get ( "/%s/test1" % self.USER )
         self.assertEquals ( 200, response.status_code )
 
+    def test_view_is_private ( self ):
+        response = self.client.get ( "/%s123/test3" % self.USER )
+
+        self.assertEquals ( 404, response.status_code )
+
     def test_view_not_has_action ( self ):
         response = self.client.get ( "/%s123/test 1" % self.USER )
         soup = BeautifulSoup ( response.content )

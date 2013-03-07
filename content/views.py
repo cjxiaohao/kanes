@@ -20,6 +20,10 @@ def view ( request, user, path ):
     user = User.objects.get ( username = user )
 
     content = Content.objects.get ( user = user, slug = path )
+    if not content.public:
+        if not content.user == request.user:
+            raise Http404
+
     context = {\
         "user": user,
         "path": path,

@@ -8,6 +8,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "bower": "~0.8.5",
     "grunt": "~0.4.0",
     "grunt-express-server": "~0.1.0",
     "grunt-contrib-livereload": "~0.1.2",

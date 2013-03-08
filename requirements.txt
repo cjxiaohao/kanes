@@ -6,3 +6,4 @@ raven
 misaka
 pygments
 houdini.py
+MySQL-python

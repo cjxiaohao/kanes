@@ -11,16 +11,29 @@ ADMINS = (
 WEB_ROOT = os.path.join ( os.path.abspath ( os.path.dirname ( __file__ ) ), ".." )
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev.sqlite3',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+PRODUCTION = os.getenv ( "KANES_PRODUCTION" )
+if not PRODUCTION:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'dev.sqlite3',                      # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': os.getenv ( "KANES_MYSQL_DATABASE", "" ),                      # Or path to database file if using sqlite3.
+            'USER': os.getenv ( "KANES_MYSQL_USERNAME", "" ),                      # Not used with sqlite3.
+            'PASSWORD': os.getenv ( "KANES_MYSQL_PASSWORD", "" ),                  # Not used with sqlite3.
+            'HOST': os.getenv ( "KANES_MYSQL_HOST", "" ),                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': os.getenv ( "KANES_MYSQL_PORT", "" ),                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -29,11 +42,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-CN'
 
 SITE_ID = 1
 
@@ -135,6 +148,14 @@ INSTALLED_APPS = (
     'crispy_forms',
     'registration',
 )
+
+if PRODUCTION:
+    INSTALLED_APPS += ( \
+        'raven.contrib.django.raven_compat',
+    )
+    RAVEN_CONFIG = { \
+        'dsn': os.getenv ( "KANES_SENTRY_DSN", "" ),
+    }
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

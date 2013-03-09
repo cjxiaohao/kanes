@@ -1,4 +1,4 @@
-# Django settings for gist2c project.
+# Django settings for kanes project.
 import os
 
 DEBUG = True
@@ -115,10 +115,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'gist2c.urls'
+ROOT_URLCONF = 'kanes.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'gist2c.wsgi.application'
+WSGI_APPLICATION = 'kanes.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join ( WEB_ROOT, "templates" ),

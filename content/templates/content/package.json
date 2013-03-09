@@ -1,7 +1,7 @@
 {
-  "name": "gist2c-template",
+  "name": "kanes-template",
   "version": "0.0.1",
-  "description": "gist2c的模版项目。",
+  "description": "kanes的前端。",
   "author": "CJ <weicongju@gmail.com>",
   "scripts": {
     "start": "node bin/server"

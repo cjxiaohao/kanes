@@ -18,8 +18,16 @@ def all ( request ):
 
 def view ( request, user, path ):
     user = User.objects.get ( username = user )
-
-    content = Content.objects.get ( user = user, slug = path )
+    path = not path and "/" or path
+    
+    try:
+        content = Content.objects.get ( user = user, slug = path )
+    except Content.DoesNotExist:
+        if request.user:
+            if not request.user == user:
+                raise Http404
+        
+        return _write ( request, path )
     if not content.public:
         if not content.user == request.user:
             raise Http404
@@ -35,20 +43,18 @@ def view ( request, user, path ):
 def revision ( request, user, path ):
     pass
 
-@login_required
-def write ( request, path ):
-    if not path:
+def _write ( request, path ):
+    path = not path and "/" or path
+    initial = { "slug": path }
+
+    try:
+        content = Content.objects.get ( user = request.user, slug = path )
+    except Content.DoesNotExist:
         content = None
-    else:
-        try :
-            content = Content.objects.get ( user = request.user, slug = path )
-        except Content.DoesNotExist:
-            raise Http404
-        if not request.user == content.user:
-            raise Http404
 
     if request.method == "POST":
-        write_form = WriteForm ( request.POST, instance = content )
+        initial.update ( request.POST.dict ( ) )
+        write_form = WriteForm ( initial, instance = content )
         if write_form.is_valid ( ):
             write_form.instance.user = request.user
             write_form.save ( )
@@ -58,10 +64,14 @@ def write ( request, path ):
                           args = ( request.user.username, \
                                    write_form.cleaned_data['slug'], ) ) )
     else:
-        write_form = WriteForm ( instance = content )
+        write_form = WriteForm ( initial = initial, instance = content )
 
     context = {\
         "write_form": write_form,
     }
     return render ( request, "content/write.html", context )
 
+
+@login_required
+def write ( request, path ):
+    return _write ( request, path )

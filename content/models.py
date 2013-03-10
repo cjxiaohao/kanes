@@ -21,8 +21,7 @@ SYNTAX = ( \
 
 class Content ( models.Model ):
     user = models.ForeignKey ( User, editable = False, default = 0 )
-    slug = models.CharField ( u"路径", max_length = 255, db_index = True, \
-                              unique = True )
+    slug = models.CharField ( u"路径", max_length = 255, db_index = True, )
     body = models.TextField ( u"内容" )
     syntax = models.CharField ( u"语法解析器", max_length = 50, \
                                 choices = SYNTAX, default = "TEXT", \
@@ -51,6 +50,8 @@ class Content ( models.Model ):
                         revision = self.revisions )
         c.save ( )
 
+    class Meta:
+        unique_together = ( "user", "slug", )
 class Changelog ( models.Model ):
     revision = models.IntegerField ( default = 0 )
     content = models.ForeignKey ( Content )

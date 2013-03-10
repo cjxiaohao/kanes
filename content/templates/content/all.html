@@ -14,7 +14,8 @@
         <tbody>
             {% for content in contents %}
             <tr>
-                <td><a href="{% url content_view user.username content.slug %}">{{content.slug}}</a></td>
+
+                <td><a href="{% if not content.slug == "/" %}{% url content_view user.username content.slug %}{% else %}{% url content_view user.username '' %}{% endif %}">{{content.slug}}</a></td>
                 <td>{{content.revisions}}</td>
                 <td>{{content.create_at}}</td>
             </tr>

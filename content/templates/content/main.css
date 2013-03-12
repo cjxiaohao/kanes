@@ -1083,6 +1083,6 @@ form.bs-docs-example {
   width: 98%;
 }
 
-.content-write input {
+.content-write #id_slug {
   width: 98%;
 }
